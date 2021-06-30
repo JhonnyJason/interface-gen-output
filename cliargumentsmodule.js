@@ -31,14 +31,20 @@
   getHelpText = function() {
     log("getHelpText");
     return `Usage
-    $ interface-gen <arg1>
+    $ interface-gen <arg1> <arg2>
     
 Options
     required:
         arg1, --source <path/to/source>, -s <path/to/source>
-        
+            source of the interface definition in md
+
+    optional:
+        arg2, --name <interface-name>, -n <interface-name>
+            specific interface name to be used for the generated files
+            defaults to filename of the source.
+
 Examples
-    $  interface-gen definition.md
+    $  interface-gen definition.md sampleinterface
     ...`;
   };
 
@@ -49,22 +55,33 @@ Examples
         source: {
           type: "string", // or string
           alias: "s"
+        },
+        name: {
+          type: "string",
+          alias: "n"
         }
       }
     };
   };
 
   extractMeowed = function(meowed) {
-    var source;
+    var name, source;
     log("extractMeowed");
     source = "";
+    name = "";
     if (meowed.input[0]) {
       source = meowed.input[0];
+    }
+    if (meowed.input[1]) {
+      name = meowed.input[1];
     }
     if (meowed.flags.source) {
       source = meowed.flags.source;
     }
-    return {source};
+    if (meowed.flags.name) {
+      name = meowed.flags.name;
+    }
+    return {source, name};
   };
 
   throwErrorOnUsageFail = function(extract) {
