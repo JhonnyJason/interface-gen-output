@@ -60,6 +60,10 @@
     log("= = =");
   };
 
+  pathmodule.getFilePath = function(name) {
+    return path.resolve(pathmodule.dirname, name);
+  };
+
   //endregion
   module.exports = pathmodule;
 
