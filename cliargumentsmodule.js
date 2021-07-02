@@ -89,9 +89,6 @@ Examples
     if (!extract.source) {
       throw new Error("Usag error: no source has been defined!");
     }
-    if (!(typeof extract.source === "string")) {
-      throw new Error("Usage error: defined source is not a string!");
-    }
   };
 
   //endregion
