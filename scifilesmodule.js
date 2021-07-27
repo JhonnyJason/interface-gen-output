@@ -75,7 +75,12 @@ scihandlers.{{route}} = ({{args}}) ->
   //###########################################################
   //region internalFunctions
   getRoutesName = function(name) {
+    var l;
     name = name.toLowerCase();
+    l = "interface".length; // get rid of "interface" postfix
+    if (name.indexOf("interface") > 0) {
+      name = name.slice(0, name.length - l);
+    }
     if (name.indexOf("routes") < 0) {
       name = name + "routes";
     }
@@ -83,7 +88,12 @@ scihandlers.{{route}} = ({{args}}) ->
   };
 
   getHandlersName = function(name) {
+    var l;
     name = name.toLowerCase();
+    l = "interface".length; // get rid of "interface" postfix
+    if (name.indexOf("interface") > 0) {
+      name = name.slice(0, name.length - l);
+    }
     if (name.indexOf("handlers") < 0) {
       name = name + "handlers";
     }

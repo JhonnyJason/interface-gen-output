@@ -138,6 +138,7 @@
     routeObject = {
       route: routeName,
       args: requestArgs.join(", "),
+      requestBlock: "\"" + requestArgs.join("\": \"...\", \n\"") + "\": \"...\"",
       argsBlock: createArgsBlock(requestArgs),
       response: sampleResponse
     };
