@@ -39,25 +39,29 @@
   //###########################################################
   //region templates
   localRequestTemplate = `{{=<% %>=}}
+<% #routes %>
 ### 
-POST {{local}}/<% route %>
+POST {{local}}/<%{route}%>
 content-type: application/json
 
 {
-<% requestBlock %>
+<%{requestBlock}%>
 }
+<% /routes %>
 <%={{ }}=%>`;
 
   //###########################################################
   deployRequestTemplate = `{{=<% %>=}}
+<% #routes %>
 ### 
-POST {{deploy}}/<% route %>
+POST {{deploy}}/<%{route}%>
 content-type: application/json
 
 {
-<% requestBlock %>
+<%{requestBlock}%>
 }
-<%={{ }}=%>`;
+<% /routes %>
+<%={{{ }}}=%>`;
 
   //endregion
 
