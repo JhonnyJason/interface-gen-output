@@ -17,7 +17,7 @@
 
   //#############################################################
   //region node_modules
-  meow = require("meow");
+  meow = require('meow');
 
   //endregion
 

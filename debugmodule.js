@@ -13,15 +13,16 @@
   //#############################################################################
   // console.log "debugmodule.initialize - nothing to do"
   debugmodule.modulesToDebug = {
-    unbreaker: true
+    unbreaker: true,
+    // cliargumentsmodule: true
+    // configmodule: true
+    // mainprocessmodule: true
+    // networkinterfacemodule: true
+    // scifilesmodule: true
+    // startupmodule: true
+    testingfilesmodule: true
   };
 
-  // cliargumentsmodule: true
-  // configmodule: true
-  // mainprocessmodule: true
-  // networkinterfacemodule: true
-  // scifilesmodule: true
-  // startupmodule: true
   module.exports = debugmodule;
 
 }).call(this);

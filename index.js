@@ -7,6 +7,8 @@
 
   global.allModules = Modules;
 
+  console.log(JSON.stringify(Modules));
+
   run = async function() {
     var m, n, promises;
     promises = (function() {
