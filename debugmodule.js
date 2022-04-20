@@ -7,6 +7,7 @@ import {
 addModulesToDebug({
   // cliargumentsmodule: true
   // configmodule: true
+  definitionfilemodule: true,
   // mainprocessmodule: true
   // networkinterfacemodule: true
   pathmodule: true,
