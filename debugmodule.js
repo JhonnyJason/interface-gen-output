@@ -7,11 +7,12 @@ import {
 addModulesToDebug({
   // cliargumentsmodule: true
   // configmodule: true
-  definitionfilemodule: true,
-  // mainprocessmodule: true
+  // definitionfilemodule: true
+  mainprocessmodule: true,
   // networkinterfacemodule: true
-  pathmodule: true,
-  // scifilesmodule: true
-  // startupmodule: true
-  testingfilesmodule: true
+  pathhandlermodule: true
 });
+
+// scifilesmodule: true
+// startupmodule: true
+// testingfilesmodule: true

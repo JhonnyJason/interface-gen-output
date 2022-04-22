@@ -16,20 +16,24 @@ import meow from 'meow';
 getHelpText = function() {
   log("getHelpText");
   return `Usage
-    $ interface-gen <arg1> <arg2>
+    $ interface-gen <arg1> <arg2> <arg3>
     
 Options
     required:
-        arg1, --source <path/to/source>, -s <path/to/source>
-            source of the interface definition in md
-
-    optional:
-        arg2, --name <interface-name>, -n <interface-name>
+        arg1, --name <interface-name>, -n <interface-name>
             specific interface name to be used for the generated files
-            defaults to filename of the source.
+            
+    optional:
+        arg2, --root <path-to-root-dir>, -r <path-to-root-dir>
+            specific root directory where all the files would be found
+            defaults to the current working directory
+
+        arg3, --mode <operation-mode>, -m <operation-mode>
+            mode how the interface could be generated
+            defaults to "union"
 
 Examples
-    $  interface-gen definition.md sampleinterface
+    $  interface-gen sample ../sample-interface-dir intersect-ignore
     ...`;
 };
 
@@ -38,42 +42,71 @@ getOptions = function() {
   return {
     importMeta: import.meta,
     flags: {
-      source: {
-        type: "string", // or string
-        alias: "s"
-      },
       name: {
         type: "string",
         alias: "n"
+      },
+      root: {
+        type: "string",
+        alias: "r"
+      },
+      mode: {
+        type: "string",
+        alias: "m"
       }
     }
   };
 };
 
+//#############################################################
 extractMeowed = function(meowed) {
-  var name, source;
+  var aliasMap, mode, name, root;
   log("extractMeowed");
-  source = "";
   name = "";
+  mode = "union";
+  root = process.cwd();
   if (meowed.input[0]) {
-    source = meowed.input[0];
+    name = meowed.input[0];
   }
   if (meowed.input[1]) {
-    name = meowed.input[1];
+    root = meowed.input[1];
   }
-  if (meowed.flags.source) {
-    source = meowed.flags.source;
+  if (meowed.input[2]) {
+    mode = meowed.input[2];
   }
   if (meowed.flags.name) {
     name = meowed.flags.name;
   }
-  return {source, name};
+  if (meowed.flags.root) {
+    root = meowed.flags.root;
+  }
+  if (meowed.flags.mode) {
+    mode = meowed.flags.mode;
+  }
+  aliasMap = {
+    "u": "union",
+    "ii": "intersect-ignore",
+    "ic": "intersect-cut"
+  };
+  if (aliasMap[mode] != null) {
+    mode = aliasMap[mode];
+  }
+  return {name, root, mode};
 };
 
 throwErrorOnUsageFail = function(extract) {
+  var legalModes;
   log("throwErrorOnUsageFail");
-  if (!extract.source) {
-    throw new Error("Usag error: no source has been defined!");
+  if (!extract.name) {
+    throw new Error("Usage error: Interface name is not specified!");
+  }
+  legalModes = {
+    "union": true,
+    "intersect-ignore": true,
+    "intersect-cut": true
+  };
+  if (!legalModes[extract.mode]) {
+    throw new Error("Usag error: Invalid mode specified!");
   }
 };
 

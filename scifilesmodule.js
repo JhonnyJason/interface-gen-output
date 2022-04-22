@@ -13,7 +13,7 @@ import fs from "fs";
 
 import M from "mustache";
 
-import * as p from "./pathmodule.js";
+import * as p from "./pathhandlermodule.js";
 
 //endregion
 
