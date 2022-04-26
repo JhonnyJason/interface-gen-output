@@ -7,29 +7,54 @@ import {
   createLogFunctions
 } from "thingy-debug";
 
-({log, olog} = createLogFunctions("definitionfileparser"));
+({log, olog} = createLogFunctions("documentationparser"));
 
 import fs from "fs";
 
 import * as HJSON from "hjson";
 
-import * as pm from "./pathhandlermodule.js";
+import * as ph from "./pathhandlermodule.js";
+
+import {
+  LinkedMap
+} from "./linkedmapmodule.js";
 
 //endregion
 
   //###########################################################
-export var DefinitionFile = class DefinitionFile {
+export var DocumentationFile = class DocumentationFile {
   constructor() {
-    var path;
-    path = pm.getDefinitionFilePath();
-    this.fileString = fs.readFileSync(path, "utf-8");
-    log("constructed DefinitionFile");
+    var err;
+    try {
+      this.data = new LinkedMap();
+      this.path = ph.getDocumentationFilePath();
+      this.fileString = fs.readFileSync(this.path, "utf-8");
+      log("constructed DocumentationFile");
+      this.exists = true;
+    } catch (error) {
+      err = error;
+      log(err);
+      log("documentation File not appropriately constructed!");
+      this.exists = false;
+    }
   }
 
   parse() {
+    var cObj, i, id, idx, len, line, ref;
+    if (!this.exists) {
+      throw new Error("Documentation File does not exist!");
+    }
     log("real implementation here!");
-    sliceFile();
-    return extractInterface();
+    this.lines = this.fileString.split("\n");
+    log(this.lines.length);
+    ref = this.lines;
+    for (idx = i = 0, len = ref.length; i < len; idx = ++i) {
+      line = ref[idx];
+      id = "" + idx;
+      cObj = {id, line};
+      this.data.append(id, cObj);
+    }
+    log(this.data.size);
   }
 
 };

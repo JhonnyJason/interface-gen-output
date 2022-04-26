@@ -4,16 +4,34 @@
 var log, olog;
 
 import {
-  createLogFunctions
+  createLogFunctions,
+  debugOn
 } from "thingy-debug";
 
 ({log, olog} = createLogFunctions("filesparsermodule"));
 
-//endregion
+import {
+  //endregion
+
+  //###########################################################
+  DocumentationFile
+} from "./documentationparser.js";
 
 //###########################################################
 export var initialize = function() {
   log("initialize");
+  debugOn("documentationparser");
 };
 
+//###########################################################
 //Implement or Remove :-)
+export var parseAllFiles = function() {
+  var documentation;
+  log("parseAllFiles");
+  documentation = new DocumentationFile();
+  if (documentation.exists) {
+    documentation.parse();
+  } else {
+    log("No documentation file found!");
+  }
+};

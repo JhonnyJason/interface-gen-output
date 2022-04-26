@@ -11,6 +11,8 @@ import * as definitionfilemodule from "./definitionfilemodule.js";
 
 import * as filesparsermodule from "./filesparsermodule.js";
 
+import * as linkedmapmodule from "./linkedmapmodule.js";
+
 import * as mainprocessmodule from "./mainprocessmodule.js";
 
 import * as networkinterfacemodule from "./networkinterfacemodule.js";
@@ -23,6 +25,6 @@ import * as startupmodule from "./startupmodule.js";
 
 import * as testingfilesmodule from "./testingfilesmodule.js";
 
-Modules = {cliargumentsmodule, configmodule, debugmodule, definitionfilemodule, filesparsermodule, mainprocessmodule, networkinterfacemodule, pathhandlermodule, scifilesmodule, startupmodule, testingfilesmodule};
+Modules = {cliargumentsmodule, configmodule, debugmodule, definitionfilemodule, filesparsermodule, linkedmapmodule, mainprocessmodule, networkinterfacemodule, pathhandlermodule, scifilesmodule, startupmodule, testingfilesmodule};
 
 export default Modules;
