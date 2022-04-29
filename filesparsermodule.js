@@ -14,7 +14,7 @@ import {
   //endregion
 
   //###########################################################
-  DocumentationFile
+  DocumentationFileParser
 } from "./documentationparser.js";
 
 //###########################################################
@@ -26,11 +26,11 @@ export var initialize = function() {
 //###########################################################
 //Implement or Remove :-)
 export var parseAllFiles = function() {
-  var documentation;
+  var documentationParser;
   log("parseAllFiles");
-  documentation = new DocumentationFile();
-  if (documentation.exists) {
-    documentation.parse();
+  documentationParser = new DocumentationFileParser();
+  if (documentationParser.fileExists) {
+    documentationParser.parse();
   } else {
     log("No documentation file found!");
   }

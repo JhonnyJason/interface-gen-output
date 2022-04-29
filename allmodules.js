@@ -23,8 +23,10 @@ import * as scifilesmodule from "./scifilesmodule.js";
 
 import * as startupmodule from "./startupmodule.js";
 
+import * as stateguardianmodule from "./stateguardianmodule.js";
+
 import * as testingfilesmodule from "./testingfilesmodule.js";
 
-Modules = {cliargumentsmodule, configmodule, debugmodule, definitionfilemodule, filesparsermodule, linkedmapmodule, mainprocessmodule, networkinterfacemodule, pathhandlermodule, scifilesmodule, startupmodule, testingfilesmodule};
+Modules = {cliargumentsmodule, configmodule, debugmodule, definitionfilemodule, filesparsermodule, linkedmapmodule, mainprocessmodule, networkinterfacemodule, pathhandlermodule, scifilesmodule, startupmodule, stateguardianmodule, testingfilesmodule};
 
 export default Modules;
