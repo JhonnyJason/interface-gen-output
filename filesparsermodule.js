@@ -17,21 +17,31 @@ import {
   DocumentationFileParser
 } from "./documentationparser.js";
 
+import {
+  InterfaceFileParser
+} from "./interfaceparser.js";
+
 //###########################################################
 export var initialize = function() {
   log("initialize");
-  debugOn("documentationparser");
+  // debugOn("documentationparser")
+  debugOn("interfaceparser");
 };
 
 //###########################################################
-//Implement or Remove :-)
 export var parseAllFiles = function() {
-  var documentationParser;
+  var documentationParser, interfaceParser;
   log("parseAllFiles");
   documentationParser = new DocumentationFileParser();
   if (documentationParser.fileExists) {
     documentationParser.parse();
   } else {
     log("No documentation file found!");
+  }
+  interfaceParser = new InterfaceFileParser();
+  if (interfaceParser.fileExists) {
+    interfaceParser.parse();
+  } else {
+    log("No interface file found!");
   }
 };

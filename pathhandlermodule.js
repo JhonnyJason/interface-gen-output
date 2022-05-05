@@ -54,13 +54,12 @@ isDirectory = function(testedPath) {
 //###########################################################
 //region exports
 export var createValidPaths = function(root, name) {
-  var intefaceFilePath;
   absoluteBasePath = path.resolve(root);
   if (!isDirectory(absoluteBasePath)) {
     throw new Error("Error: Specified root path does not exist as directory!");
   }
   documentationFilePath = getFilePath(name + "interface.md");
-  intefaceFilePath = getFilePath(name + "interface.coffee");
+  interfaceFilePath = getFilePath(name + "interface.coffee");
   routesFilePath = getFilePath(name + "routes.coffee");
   handlersFilePath = getFilePath(name + "handlers.coffee");
   localTestingFilePath = getFilePath(name + "local.http");
