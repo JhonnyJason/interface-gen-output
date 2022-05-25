@@ -250,7 +250,7 @@ export var DocumentationFileParser = class DocumentationFileParser {
     for (j = 0, len1 = ref1.length; j < len1; j++) {
       routeBlock = ref1[j];
       routeObj = this.createRouteObject(routeBlock);
-      this.routeObject.push(routeObj);
+      this.routeObjects.push(routeObj);
       this.routeHeadlines.push(routeObj.headline);
       all.push(routeObj.headline);
       this.requestObjects.push(routeObj.requestObj);
@@ -291,8 +291,26 @@ export var DocumentationFileParser = class DocumentationFileParser {
   }
 
   //#######################################################
+  getHeadEndIndex() {
+    var routeStart, sectionStart;
+    if (this.subSections.length && this.routeBlocks.length) {
+      sectionStart = this.subSections[0].start;
+      routeStart = this.routeBlocks[0].start;
+      if (sectionStart > routeStart) {
+        return routeStart;
+      } else {
+        return sectionStart;
+      }
+    } else if (this.subSections.length) {
+      return this.subSections[0].start;
+    } else if (this.routeBlocks.length) {
+      return this.routeBlocks[0].start;
+    }
+    return this.document.end;
+  }
+
   createVersionHeadline() {
-    var lineObj, routeStart, scanEnd, scanIndex, sectionStart, titleIndex, titleLineObj;
+    var lineObj, scanEnd, scanIndex, titleIndex, titleLineObj;
     // title headline is VersionHeadline        
     if (this.topBlock != null) {
       titleIndex = this.topBlock.start;
@@ -301,44 +319,15 @@ export var DocumentationFileParser = class DocumentationFileParser {
         return new VersionHeadline(titleLineObj);
       }
     }
-    
     // otherwise it could be any contentLine in the head
-    if (this.subSections.length && this.routeBlocks.length) {
-      sectionStart = this.subSections[0].start;
-      routeStart = this.routeBlocks[0].start;
-      if (sectionStart > routeStart) {
-        scanEnd = routeStart;
-      } else {
-        scanEnd = sectionStart;
+    scanEnd = this.getHeadEndIndex();
+    scanIndex = 0;
+    while (scanIndex < scanEnd) {
+      lineObj = this.lineObjects[scanIndex];
+      if (versionDetect.test(lineObj.line)) {
+        return new VersionHeadline(lineObj);
       }
-      scanIndex = 0;
-      while (scanIndex < scanEnd) {
-        lineObj = this.lineObjects[scanIndex];
-        if (versionDetect.test(lineObj.line)) {
-          return new VersionHeadline(lineObj);
-        }
-        scanIndex++;
-      }
-    } else if (this.subSections.length) {
-      scanEnd = this.subSections[0].start;
-      scanIndex = 0;
-      while (scanIndex < scanEnd) {
-        lineObj = this.lineObjects[scanIndex];
-        if (versionDetect.test(lineObj.line)) {
-          return new VersionHeadline(lineObj);
-        }
-        scanIndex++;
-      }
-    } else if (this.routeBlocks.length) {
-      scanEnd = this.routeBlocks[0].start;
-      scanIndex = 0;
-      while (scanIndex < scanEnd) {
-        lineObj = this.lineObjects[scanIndex];
-        if (versionDetect.test(lineObj.line)) {
-          return new VersionHeadline(lineObj);
-        }
-        scanIndex++;
-      }
+      scanIndex++;
     }
     return new VersionHeadline();
   }
