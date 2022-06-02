@@ -160,7 +160,7 @@ export var InterfaceFileParser = class InterfaceFileParser {
         // log "level > currentLevel and level != 7"
         // the currentBlock is above us so we add the new Block beneath
         //region addNewBlock()
-        olog(currentBlock);
+        // olog currentBlock
         block = new DocumentBlock(this.lineCursor, type, level, currentBlock);
         currentBlock.add(block);
         openBlocks.push(block);
@@ -178,7 +178,7 @@ export var InterfaceFileParser = class InterfaceFileParser {
         currentBlock = openBlocks[openBlocks.length - 1];
         
         //region addNewBlock()
-        olog(currentBlock);
+        // olog currentBlock
         block = new DocumentBlock(this.lineCursor, type, level, currentBlock);
         currentBlock.add(block);
         openBlocks.push(block);
@@ -186,7 +186,7 @@ export var InterfaceFileParser = class InterfaceFileParser {
       //endregion
       } else if (level === 7) {
         // log "level == 7"
-        log(currentLevel);
+        // log currentLevel
         // create or add Block for content or empty space
         if (currentLevel !== 7) {
           // initially creating the new block for emptySpaces or content
@@ -205,7 +205,7 @@ export var InterfaceFileParser = class InterfaceFileParser {
             }
           }
           //region addNewBlock()
-          olog(currentBlock);
+          // olog currentBlock
           block = new DocumentBlock(this.lineCursor, type, level, currentBlock);
           currentBlock.add(block);
           openBlocks.push(block);
@@ -219,7 +219,7 @@ export var InterfaceFileParser = class InterfaceFileParser {
           currentBlock = openBlocks[openBlocks.length - 1];
           
           //region addNewBlock()
-          olog(currentBlock);
+          // olog currentBlock
           block = new DocumentBlock(this.lineCursor, type, level, currentBlock);
           currentBlock.add(block);
           openBlocks.push(block);
@@ -441,7 +441,7 @@ export var InterfaceFileParser = class InterfaceFileParser {
 
   createRouteObject(functionBlock) {
     var bodyEnd, bodyLines, bodyStart, functionObj, headline, headlineIndex, index, line;
-    olog(functionBlock);
+    // olog functionBlock
     functionObj = new FunctionObject(functionBlock);
     headlineIndex = functionBlock.start;
     headline = this.lineObjects[headlineIndex].line;
@@ -457,7 +457,7 @@ export var InterfaceFileParser = class InterfaceFileParser {
       }
       index++;
     }
-    log(bodyLines.length);
+    // log bodyLines.length
     if (bodyLines.length !== 3) {
       throw new Error("Invalid Function body size!\n" + bodyLines.join("\n"));
     }
