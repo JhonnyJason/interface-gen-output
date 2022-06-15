@@ -4,16 +4,18 @@ import {
 } from "thingy-debug";
 
 //###############################################################################
-addModulesToDebug({});
+addModulesToDebug({
+  // cliargumentsmodule: true
+  // configmodule: true
+  // definitionfilemodule: true
+  // filesparsermodule: true
+  // linkedmapmodule: true
+  // mainprocessmodule: true
+  // networkinterfacemodule: true
+  // pathhandlermodule: true
+  // scifilesmodule: true
+  // startupmodule: true
+  structuresyncmodule: true
+});
 
-// cliargumentsmodule: true
-// configmodule: true
-// definitionfilemodule: true
-// filesparsermodule: true
-// linkedmapmodule: true
-// mainprocessmodule: true
-// networkinterfacemodule: true
-// pathhandlermodule: true
-// scifilesmodule: true
-// startupmodule: true
 // testingfilesmodule: true

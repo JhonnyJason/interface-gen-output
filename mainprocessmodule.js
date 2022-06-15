@@ -13,6 +13,8 @@ import * as ph from "./pathhandlermodule.js";
 
 import * as fp from "./filesparsermodule.js";
 
+import * as ss from "./structuresyncmodule.js";
+
 //endregion
 
 //###########################################################
@@ -22,8 +24,11 @@ export var execute = function(e) {
   global.interfaceName = e.name + "interface";
   ph.createValidPaths(e.root, e.name);
   fp.parseAllFiles();
+  ss.syncStructures(e.mode);
   throw new Error("Death on Purpose!");
 };
+
+//#TODO write files
 
 // interfaceObject = df.interfaceObject
 // if e.name? then name = e.name

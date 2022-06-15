@@ -25,10 +25,10 @@ import * as scifilesmodule from "./scifilesmodule.js";
 
 import * as startupmodule from "./startupmodule.js";
 
-import * as stateguardianmodule from "./stateguardianmodule.js";
+import * as structuresyncmodule from "./structuresyncmodule.js";
 
 import * as testingfilesmodule from "./testingfilesmodule.js";
 
-Modules = {cliargumentsmodule, commonstructuremodule, configmodule, debugmodule, definitionfilemodule, filesparsermodule, linkedmapmodule, mainprocessmodule, networkinterfacemodule, pathhandlermodule, scifilesmodule, startupmodule, stateguardianmodule, testingfilesmodule};
+Modules = {cliargumentsmodule, commonstructuremodule, configmodule, debugmodule, definitionfilemodule, filesparsermodule, linkedmapmodule, mainprocessmodule, networkinterfacemodule, pathhandlermodule, scifilesmodule, startupmodule, structuresyncmodule, testingfilesmodule};
 
 export default Modules;

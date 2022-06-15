@@ -81,6 +81,7 @@ export var DocumentationFileParser = class DocumentationFileParser {
   constructor() {
     var err;
     try {
+      this.parsed = false;
       this.path = ph.getDocumentationFilePath();
       this.fileString = fs.readFileSync(this.path, "utf-8");
       log("constructed DocumentationFileParser");
@@ -188,15 +189,16 @@ export var DocumentationFileParser = class DocumentationFileParser {
       block.close(this.lineCursor);
     }
     this.createCommonStructure();
+    // log "parsing ended!"
+    // olog @document
+    // olog @topBlock
+    // olog @subSections
+    // olog @routeBlocks
+    this.parsed = true;
   }
 
   
     //#######################################################
-  // log "parsing ended!"
-  // olog @document
-  // olog @topBlock
-  // olog @subSections
-  // olog @routeBlocks
   addBlock(block) {
     if (block.parent != null) {
       if (block.parent.type === "requestHead" || block.parent.type === "responseHead") {
@@ -338,6 +340,8 @@ export var DocumentationFileParser = class DocumentationFileParser {
     headlineIndex = routeBlock.start;
     headlineObj = this.lineObjects[headlineIndex];
     result.headline = new RouteHeadline(headlineObj);
+    result.routeName = result.headline.routeName;
+    result.sectionName = routeBlock.parent;
     ref = routeBlock.children;
     for (i = 0, len = ref.length; i < len; i++) {
       child = ref[i];
@@ -351,6 +355,8 @@ export var DocumentationFileParser = class DocumentationFileParser {
     try {
       result.requestObj = this.createRequestObject(requestBlock);
       result.responseObj = this.createResponseObject(responseBlock);
+      result.requestArgs = result.requestObj.requestArgs;
+      result.sampleResponse = result.responseObj.definitionJson;
       return result;
     } catch (error) {
       err = error;
